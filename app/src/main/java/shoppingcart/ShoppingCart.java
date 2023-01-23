@@ -5,21 +5,25 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    List<Item> items = new ArrayList<>();
+    private List<Item> itemsInCart = new ArrayList<>();
 
     public ShoppingCart() {
     }
 
     public ShoppingCart(List<Item> items) {
-        this.items = items;
+        this.itemsInCart = items;
     }
 
     public List<Item> getItems() {
-        return items;
+        return itemsInCart;
     }
 
-    public void add(Item item) {
+    public void addItem(Item item) {
+        this.itemsInCart.add(item);
+    }
 
+    public int totalNumberOfItems() {
+        return itemsInCart.size();
     }
 
 }
