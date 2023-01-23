@@ -14,4 +14,13 @@ public class ShoppingCartTest {
         int totalItemCount = cart.totalNumberOfItems();
         assertThat(totalItemCount).isEqualTo(1);
     }
+
+    @Test
+    public void should_add_multiple_items_to_the_cart() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem(new Item("item-1", "Effectice Java", ItemType.BOOK, BigDecimal.valueOf(4000)));
+        cart.addItem(new Item("item-2", "pen", ItemType.PEN, BigDecimal.valueOf(250)));
+        int totalItemCount = cart.totalNumberOfItems();
+        assertThat(totalItemCount).isEqualTo(2);
+    }
 }
