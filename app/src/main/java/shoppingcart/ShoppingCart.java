@@ -6,13 +6,11 @@ import java.util.List;
 public class ShoppingCart {
 
     private List<LineItem> itemsInCart = new ArrayList<>();
+    private final Inventory inventory;
 
-    // public ShoppingCart() {
-    // }
-
-    // public ShoppingCart(List<LineItem> lineItems) {
-    // this.itemsInCart = lineItems;
-    // }
+    public ShoppingCart(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     public List<LineItem> getItems() {
         return itemsInCart;
@@ -28,6 +26,10 @@ public class ShoppingCart {
             totalItem = totalItem + lineItem.getQuantity();
         }
         return totalItem;
+    }
+
+    public void removeItem(LineItem lineItem) {
+        this.itemsInCart.remove(lineItem);
     }
 
 }
