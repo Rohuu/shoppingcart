@@ -49,4 +49,8 @@ public class LineItem {
         return true;
     }
 
+    public void reduceQuantityBy(int quantityToReduceBy) {
+        this.quantity -= quantityToReduceBy;
+    }
+
 }

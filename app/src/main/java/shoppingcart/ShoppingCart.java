@@ -3,6 +3,8 @@ package shoppingcart;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Objects;
+
 public class ShoppingCart {
 
     private List<LineItem> itemsInCart = new ArrayList<>();
@@ -28,8 +30,20 @@ public class ShoppingCart {
         return totalItem;
     }
 
-    public void removeItem(LineItem lineItem) {
-        this.itemsInCart.remove(lineItem);
+    public void removeItem(LineItem lineItemToRemove) {
+        boolean deleteLineItem = false;
+        for (LineItem itemInCart : itemsInCart) {
+            if (Objects.equal(itemInCart.getItemId(), lineItemToRemove.getItemId())) {
+                if (lineItemToRemove.getQuantity() == itemInCart.getQuantity()) {
+                    deleteLineItem = true;
+                } else {
+                    itemInCart.reduceQuantityBy(lineItemToRemove.getQuantity());
+                }
+            }
+        }
+        if (deleteLineItem == true) {
+            this.itemsInCart.remove(lineItemToRemove);
+        }
     }
 
 }
