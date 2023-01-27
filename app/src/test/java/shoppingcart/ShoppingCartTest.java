@@ -55,12 +55,13 @@ public class ShoppingCartTest {
 
     @Test
     public void should_remove_specific_quantity_of_an_item_from_cart() {
-        cart.addItem(new LineItem("item-1", 2));
-        cart.addItem(new LineItem("item-2", 3));
+        cart.addItem(new LineItem("item-1", 3));
+        cart.addItem(new LineItem("item-2", 4));
 
         cart.removeItem(new LineItem("item-1", 2));
-        cart.removeItem(new LineItem("item-2", 1));
+        cart.removeItem(new LineItem("item-2", 2));
         int totalItemCount = cart.totalNumberOfItems();
-        assertThat(totalItemCount).isEqualTo(2);
+        assertThat(totalItemCount).isEqualTo(3);
     }
+
 }
