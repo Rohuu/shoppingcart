@@ -8,6 +8,10 @@ public class LineItem {
     private BigDecimal price;
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
     public LineItem(String string) {
         this(string, 1);
     }
