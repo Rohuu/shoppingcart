@@ -1,6 +1,7 @@
 package shoppingcart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Objects;
@@ -18,8 +19,14 @@ public class ShoppingCart {
         return itemsInCart;
     }
 
-    public void addItem(LineItem item) {
-        this.itemsInCart.add(item);
+    public void addItem(LineItem lineItem) {
+        Item item = inventory.get(lineItem.getItemId());
+        if (item == null) {
+            throw new IllegalArgumentException("Item with given itemId does not exist in inventory");
+        }
+        lineItem.setName(item.getName());
+        lineItem.setPrice(item.getPrice());
+        this.itemsInCart.add(lineItem);
     }
 
     public int totalNumberOfItems() {
@@ -32,18 +39,22 @@ public class ShoppingCart {
 
     public void removeItem(LineItem lineItemToRemove) {
         boolean deleteLineItem = false;
-        for (LineItem itemInCart : itemsInCart) {
-            if (Objects.equal(itemInCart.getItemId(), lineItemToRemove.getItemId())) {
-                if (lineItemToRemove.getQuantity() == itemInCart.getQuantity()) {
+        for (LineItem lineItem : itemsInCart) {
+            if (Objects.equal(lineItem.getItemId(), lineItemToRemove.getItemId())) {
+                if (lineItemToRemove.getQuantity() == lineItem.getQuantity()) {
                     deleteLineItem = true;
                 } else {
-                    itemInCart.reduceQuantityBy(lineItemToRemove.getQuantity());
+                    lineItem.reduceQuantityBy(lineItemToRemove.getQuantity());
                 }
             }
         }
         if (deleteLineItem == true) {
             this.itemsInCart.remove(lineItemToRemove);
         }
+    }
+
+    public List<LineItem> listItemsInCart() {
+        return Collections.unmodifiableList(this.itemsInCart);
     }
 
 }

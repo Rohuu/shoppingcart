@@ -5,5 +5,5 @@
 build
 
 bluePrint
-bin
 .vscode
+app/bin

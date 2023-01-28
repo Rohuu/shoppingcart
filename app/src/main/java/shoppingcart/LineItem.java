@@ -1,8 +1,12 @@
 package shoppingcart;
 
+import java.math.BigDecimal;
+
 public class LineItem {
     private String itemId;
     private int quantity;
+    private BigDecimal price;
+    private String name;
 
     public LineItem(String string) {
         this(string, 1);
@@ -19,6 +23,14 @@ public class LineItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -51,6 +63,10 @@ public class LineItem {
 
     public void reduceQuantityBy(int quantityToReduceBy) {
         this.quantity -= quantityToReduceBy;
+    }
+
+    public BigDecimal getPrice() {
+        return price.multiply(BigDecimal.valueOf(quantity));
     }
 
 }
