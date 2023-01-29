@@ -3,12 +3,61 @@
  */
 package shoppingcart;
 
+import java.math.BigDecimal;
+import java.util.Scanner;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+    private static Inventory inventory;
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        inventory = new Inventory();
+        displayWelcomePage();
+        System.out.print("Enter your choice: ");
+        int choice = Integer.parseInt(sc.nextLine());
+
+        while (choice != 3) {
+            if (choice == 1) {
+                manageInventory(inventory);
+            } else if (choice == 2) {
+                manageSale();
+            }
+            displayWelcomePage();
+            choice = Integer.parseInt(sc.nextLine());
+            System.out.print("Enter your choice: ");
+        }
+
+        System.out.println("Thank you, Visit again!");
     }
+
+    private static void displayWelcomePage() {
+        System.out.println("|| Welcome to Big-Bazaar inventory management ||");
+        System.out.println("1. Inventory");
+        System.out.println("2. Sell");
+        System.out.println("3. Exit");
+    }
+
+    private static void manageInventory(Inventory inventory) {
+        addItemsToInventory(inventory);
+        System.out.println(inventory);
+    }
+
+    private static void addItemsToInventory(Inventory inventory) {
+        System.out.println("Enter item ID");
+        String id = sc.nextLine();
+        System.out.println("Enter item Name");
+        String name = sc.nextLine();
+        System.out.println("Enter item Type");
+        System.out.println("Enter item Price");
+        BigDecimal price = new BigDecimal(sc.nextLine());
+
+        Item item = new Item(id, name, ItemType.BOOK, price);
+        inventory.add(item);
+    }
+
+    private static void manageSale() {
+        System.out.println("Welcome to sales management");
+        System.out.println();
+    }
+
 }
