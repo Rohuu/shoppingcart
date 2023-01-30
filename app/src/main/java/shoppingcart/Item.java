@@ -32,4 +32,9 @@ public class Item {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Item [price=" + price + ", itemType=" + itemType + ", name=" + name + ", id=" + id + "]";
+    }
+
 }

@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) {
         inventory = new Inventory();
         displayWelcomePage();
-        System.out.print("Enter your choice: ");
+        System.out.println("Enter your choice: ");
         int choice = Integer.parseInt(sc.nextLine());
 
         while (choice != 3) {
@@ -24,7 +24,7 @@ public class App {
             }
             displayWelcomePage();
             choice = Integer.parseInt(sc.nextLine());
-            System.out.print("Enter your choice: ");
+            System.out.println("Enter your choice: ");
         }
 
         System.out.println("Thank you, Visit again!");
@@ -38,21 +38,44 @@ public class App {
     }
 
     private static void manageInventory(Inventory inventory) {
-        addItemsToInventory(inventory);
-        System.out.println(inventory);
+        System.out.println("1. Add item to inventory");
+        System.out.println("2. Delete item from inventory");
+        System.out.println("3. View inventory");
+        System.out.println("Enter your choice");
+        int choice = Integer.parseInt(sc.nextLine());
+        if (choice == 1) {
+            addItemsToInventory(inventory);
+        } else if (choice == 2) {
+            removeItemFromInventory(inventory);
+        } else {
+            viewInventory(inventory);
+        }
     }
 
     private static void addItemsToInventory(Inventory inventory) {
         System.out.println("Enter item ID");
         String id = sc.nextLine();
+
         System.out.println("Enter item Name");
         String name = sc.nextLine();
+
         System.out.println("Enter item Type");
+        // String itemTypeStr = sc.next();
+        // ItemType itemType = ItemType.valueOf(itemTypeStr.toUpperCase());
+
         System.out.println("Enter item Price");
         BigDecimal price = new BigDecimal(sc.nextLine());
 
         Item item = new Item(id, name, ItemType.BOOK, price);
         inventory.add(item);
+    }
+
+    private static void viewInventory(Inventory inventory) {
+        System.out.println(inventory);
+    }
+
+    private static void removeItemFromInventory(Inventory inventory) {
+        System.out.println("We'll update this soon!");
     }
 
     private static void manageSale() {

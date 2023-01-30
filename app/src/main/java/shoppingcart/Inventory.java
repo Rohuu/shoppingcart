@@ -14,4 +14,9 @@ public class Inventory {
         return items.get(id);
     }
 
+    @Override
+    public String toString() {
+        return "Inventory [items=" + items + "]";
+    }
+
 }
