@@ -75,7 +75,22 @@ public class App {
     }
 
     private static void removeItemFromInventory(Inventory inventory) {
-        System.out.println("We'll update this soon!");
+        System.out.println("Enter item detail you want to delete");
+        System.out.println("Enter item ID");
+        String id = sc.nextLine();
+
+        System.out.println("Enter item Name");
+        String name = sc.nextLine();
+
+        System.out.println("Enter item Type");
+        // String itemTypeStr = sc.next();
+        // ItemType itemType = ItemType.valueOf(itemTypeStr.toUpperCase());
+
+        System.out.println("Enter item Price");
+        BigDecimal price = new BigDecimal(sc.nextLine());
+
+        Item item = new Item(id, name, ItemType.BOOK, price);
+        inventory.remove(item);
     }
 
     private static void manageSale() {

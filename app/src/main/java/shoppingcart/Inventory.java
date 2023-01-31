@@ -19,4 +19,8 @@ public class Inventory {
         return "Inventory [items=" + items + "]";
     }
 
+    public void remove(Item item) {
+        this.items.remove(item.getId());
+    }
+
 }
