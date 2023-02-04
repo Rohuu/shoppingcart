@@ -7,3 +7,4 @@ build
 bluePrint
 .vscode
 app/bin
+.idea
