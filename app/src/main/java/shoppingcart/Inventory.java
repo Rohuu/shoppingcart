@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
-    private Map<String, Item> items = new HashMap<>();
+    private final Map<String, Item> items = new HashMap<>();
 
     public void add(Item item) {
         this.items.put(item.getId(), item);
@@ -23,4 +23,7 @@ public class Inventory {
         this.items.remove(item.getId());
     }
 
+    public boolean isItemPresentInInventory(String itemId) {
+        return items.containsKey(itemId);
+    }
 }
