@@ -3,7 +3,7 @@ package shoppingcart;
 import java.math.BigDecimal;
 
 public class LineItem {
-    private String itemId;
+    private final String itemId;
     private int quantity;
     private BigDecimal price;
     private String name;
@@ -63,6 +63,16 @@ public class LineItem {
         if (quantity != other.quantity)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "itemId='" + itemId + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public void reduceQuantityBy(int quantityToReduceBy) {

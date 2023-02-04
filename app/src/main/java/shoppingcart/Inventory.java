@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
+
     private final Map<String, Item> items = new HashMap<>();
 
     public void add(Item item) {
@@ -16,6 +17,7 @@ public class Inventory {
 
     @Override
     public String toString() {
+
         return "Inventory [items=" + items + "]";
     }
 

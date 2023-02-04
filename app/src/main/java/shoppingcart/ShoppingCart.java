@@ -8,7 +8,7 @@ import com.google.common.base.Objects;
 
 public class ShoppingCart {
 
-    private List<LineItem> itemsInCart = new ArrayList<>();
+    private final List<LineItem> itemsInCart = new ArrayList<>();
     private final Inventory inventory;
 
     public ShoppingCart(Inventory inventory) {
@@ -48,7 +48,8 @@ public class ShoppingCart {
                 }
             }
         }
-        if (deleteLineItem == true) {
+
+        if (deleteLineItem) {
             this.itemsInCart.remove(lineItemToRemove);
         }
     }
@@ -57,4 +58,10 @@ public class ShoppingCart {
         return Collections.unmodifiableList(this.itemsInCart);
     }
 
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "itemsInCart=" + itemsInCart +
+                '}';
+    }
 }

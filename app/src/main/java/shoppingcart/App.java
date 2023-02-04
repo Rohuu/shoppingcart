@@ -6,8 +6,6 @@ package shoppingcart;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import com.google.common.base.Objects;
-
 public class App {
     private static Inventory inventory;
     private static ShoppingCart shoppingCart;
@@ -21,11 +19,14 @@ public class App {
         System.out.println("Enter your choice: ");
         int choice = Integer.parseInt(sc.nextLine());
 
-        while (choice != 3) {
+        while (choice != 4) {
             if (choice == 1) {
                 manageInventory(inventory);
             } else if (choice == 2) {
                 manageSale(inventory);
+            }
+            else if(choice == 3){
+                viewShoppingCart();
             }
             displayWelcomePage();
             choice = Integer.parseInt(sc.nextLine());
@@ -46,7 +47,8 @@ public class App {
         System.out.println("|| Welcome to Big-Bazaar inventory management ||");
         System.out.println("1. Inventory");
         System.out.println("2. Sell");
-        System.out.println("3. Exit");
+        System.out.println("3. Go to cart");
+        System.out.println("4. Exit");
     }
 
     private static void manageInventory(Inventory inventory) {
@@ -77,7 +79,6 @@ public class App {
 
         System.out.println("Enter item Type");
         ItemType itemType = ItemType.valueOf(sc.nextLine().toUpperCase());
-        // ItemType itemType = ItemType.values()[sc.nextInt()];
 
         System.out.println("Enter item Price");
         BigDecimal price = new BigDecimal(sc.nextLine());
@@ -101,7 +102,6 @@ public class App {
 
         System.out.println("Enter item Type");
         ItemType itemType = ItemType.valueOf(sc.next().toUpperCase());
-        // ItemType itemType = ItemType.values()[sc.nextInt()];
 
         System.out.println("Enter item Price");
         BigDecimal price = new BigDecimal(sc.nextLine());
@@ -113,11 +113,18 @@ public class App {
     private static void manageSale(Inventory inventory) {
         System.out.println("Welcome to sales dept");
         System.out.println("1. Add items to cart");
+        System.out.println("2. Remove items from cart");
         int num = Integer.parseInt(sc.nextLine());
+
+        String itemId;
         if (num == 1) {
             System.out.println("Enter item ID you want to add to cart from inventory");
-            String itemId = sc.nextLine();
+            itemId = sc.nextLine();
             addItemsToShoppingCart(inventory, itemId);
+        } else if (num == 2) {
+            System.out.println("Enter item ID you want to remove from cart");
+//            itemId=sc.nextLine();
+//            removeItemsFromShoppingCart(inventory, itemId);
         } else {
             throw new IllegalArgumentException("Please press the right key");
             // addItemsToShoppingCart(inventory);
@@ -125,10 +132,24 @@ public class App {
 
     }
 
+//    private static void removeItemsFromShoppingCart(Inventory inventory,String itemId) {
+//        boolean isItemPresent= inventory.isItemPresentInInventory(itemId);
+//        if(isItemPresent){
+//            shoppingCart.removeItem(new LineItem(itemId));
+//        }
+//        else{
+//            throw new IllegalArgumentException("Item with given Id is not present in inventory");
+//        }
+//    }
+
+    private static void viewShoppingCart() {
+        System.out.println(shoppingCart);
+    }
+
     private static void addItemsToShoppingCart(Inventory inventory, String itemId) {
         boolean isItemPresent = inventory.isItemPresentInInventory(itemId);
         if (isItemPresent) {
-            shoppingCart.addItem(new LineItem(itemId, 2));
+            shoppingCart.addItem(new LineItem(itemId));
         } else {
             throw new IllegalArgumentException("Item with given Id is not present in inventory");
         }
