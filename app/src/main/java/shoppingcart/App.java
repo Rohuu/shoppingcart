@@ -123,8 +123,8 @@ public class App {
             addItemsToShoppingCart(inventory, itemId);
         } else if (num == 2) {
             System.out.println("Enter item ID you want to remove from cart");
-//            itemId=sc.nextLine();
-//            removeItemsFromShoppingCart(inventory, itemId);
+            itemId=sc.nextLine();
+            removeItemsFromShoppingCart(inventory, itemId);
         } else {
             throw new IllegalArgumentException("Please press the right key");
             // addItemsToShoppingCart(inventory);
@@ -132,15 +132,15 @@ public class App {
 
     }
 
-//    private static void removeItemsFromShoppingCart(Inventory inventory,String itemId) {
-//        boolean isItemPresent= inventory.isItemPresentInInventory(itemId);
-//        if(isItemPresent){
-//            shoppingCart.removeItem(new LineItem(itemId));
-//        }
-//        else{
-//            throw new IllegalArgumentException("Item with given Id is not present in inventory");
-//        }
-//    }
+    private static void removeItemsFromShoppingCart(Inventory inventory,String itemId) {
+        boolean isItemPresent= inventory.isItemPresentInInventory(itemId);
+        if(isItemPresent){
+            shoppingCart.removeItem(new LineItem(itemId));
+        }
+        else{
+            throw new IllegalArgumentException("Item with given Id is not present in inventory");
+        }
+    }
 
     private static void viewShoppingCart() {
         System.out.println(shoppingCart);
