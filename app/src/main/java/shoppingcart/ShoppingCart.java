@@ -15,11 +15,17 @@ public class ShoppingCart {
         this.inventory = inventory;
     }
 
-    public List<LineItem> getItems() {
-        return itemsInCart;
-    }
-
     public void addItem(LineItem lineItem) {
+        boolean isItemAlreadyPresent = isItemPresntInCart(lineItem.getItemId());
+        if (isItemAlreadyPresent) {
+            for (LineItem existingItem : itemsInCart) {
+                if (existingItem.getItemId().equals(lineItem.getItemId())) {
+                    existingItem.setQuantity(existingItem.getQuantity() + lineItem.getQuantity());
+                    return;
+                }
+            }
+        }
+
         Item item = inventory.get(lineItem.getItemId());
         if (item == null) {
             throw new IllegalArgumentException("Item with given itemId does not exist in inventory");
@@ -63,5 +69,14 @@ public class ShoppingCart {
         return "ShoppingCart{" +
                 "itemsInCart=" + itemsInCart +
                 '}';
+    }
+
+    public boolean isItemPresntInCart(String itemId) {
+        for (LineItem lineitem : itemsInCart) {
+            if (lineitem.getItemId().equals(itemId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

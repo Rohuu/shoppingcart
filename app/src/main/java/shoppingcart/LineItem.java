@@ -29,6 +29,10 @@ public class LineItem {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }

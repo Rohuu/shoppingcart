@@ -24,8 +24,7 @@ public class App {
                 manageInventory(inventory);
             } else if (choice == 2) {
                 manageSale(inventory);
-            }
-            else if(choice == 3){
+            } else if (choice == 3) {
                 viewShoppingCart();
             }
             displayWelcomePage();
@@ -47,7 +46,7 @@ public class App {
         System.out.println("|| Welcome to Big-Bazaar inventory management ||");
         System.out.println("1. Inventory");
         System.out.println("2. Sell");
-        System.out.println("3. Go to cart");
+        System.out.println("3. View cart");
         System.out.println("4. Exit");
     }
 
@@ -117,27 +116,38 @@ public class App {
         int num = Integer.parseInt(sc.nextLine());
 
         String itemId;
+        int itemQuantity;
         if (num == 1) {
             System.out.println("Enter item ID you want to add to cart from inventory");
             itemId = sc.nextLine();
-            addItemsToShoppingCart(inventory, itemId);
+            System.out.println("Enter item quantity");
+            itemQuantity=Integer.parseInt(sc.nextLine());
+            addItemsToShoppingCart(inventory, itemId, itemQuantity);
         } else if (num == 2) {
             System.out.println("Enter item ID you want to remove from cart");
-            itemId=sc.nextLine();
+            itemId = sc.nextLine();
             removeItemsFromShoppingCart(inventory, itemId);
         } else {
             throw new IllegalArgumentException("Please press the right key");
-            // addItemsToShoppingCart(inventory);
         }
 
     }
 
-    private static void removeItemsFromShoppingCart(Inventory inventory,String itemId) {
-        boolean isItemPresent= inventory.isItemPresentInInventory(itemId);
-        if(isItemPresent){
-            shoppingCart.removeItem(new LineItem(itemId));
+    private static void addItemsToShoppingCart(Inventory inventory, String itemId, int itemQuantity) {
+
+        boolean isItemPresent = inventory.isItemPresentInInventory(itemId);
+        if (isItemPresent) {
+            shoppingCart.addItem(new LineItem(itemId, itemQuantity));
+        } else {
+            throw new IllegalArgumentException("Item with given Id is not present in inventory");
         }
-        else{
+    }
+
+    private static void removeItemsFromShoppingCart(Inventory inventory, String itemId) {
+        boolean isItemPresent = inventory.isItemPresentInInventory(itemId);
+        if (isItemPresent) {
+            shoppingCart.removeItem(new LineItem(itemId));
+        } else {
             throw new IllegalArgumentException("Item with given Id is not present in inventory");
         }
     }
@@ -146,13 +156,5 @@ public class App {
         System.out.println(shoppingCart);
     }
 
-    private static void addItemsToShoppingCart(Inventory inventory, String itemId) {
-        boolean isItemPresent = inventory.isItemPresentInInventory(itemId);
-        if (isItemPresent) {
-            shoppingCart.addItem(new LineItem(itemId));
-        } else {
-            throw new IllegalArgumentException("Item with given Id is not present in inventory");
-        }
-    }
 
 }

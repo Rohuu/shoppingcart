@@ -13,7 +13,7 @@ public class ShoppingCartTest {
     private ShoppingCart cart;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Item item1 = new Item("item-1", "Effectice Java", ItemType.BOOK, BigDecimal.valueOf(4000));
         Item item2 = new Item("item-2", "pen", ItemType.PEN, BigDecimal.valueOf(250));
         inventory = new Inventory();
@@ -37,6 +37,16 @@ public class ShoppingCartTest {
         cart.addItem(new LineItem("item-2"));
         int totalItemCount = cart.totalNumberOfItems();
         assertThat(totalItemCount).isEqualTo(2);
+    }
+
+    @Test
+    public void should_add_multiple_same_items_to_the_cart() {
+        cart.addItem(new LineItem("item-1",2));
+        cart.addItem(new LineItem("item-1",4));
+
+        int totalItemCount = cart.listItemsInCart().size();
+
+        assertThat(totalItemCount).isEqualTo(1);
     }
 
     @Test
@@ -75,5 +85,6 @@ public class ShoppingCartTest {
         assertThat(lineItems.get(0).getPrice()).isEqualTo(BigDecimal.valueOf(12000));
         assertThat(lineItems.get(1).getPrice()).isEqualTo(BigDecimal.valueOf(1000));
     }
+
 
 }
